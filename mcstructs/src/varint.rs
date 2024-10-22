@@ -17,7 +17,7 @@ const SEGMENT_BITS: u8 = 0x7F;
 const CONTINUE_BIT: u8 = 0x80;
 
 /// Read VarInt from BufReader
-pub fn read_varint_bufreader<R: ?Sized>(mut reader: BufReader<&[u8]>) -> Result<i32, VarIntReadError>
+pub fn read_varint_bufreader<R: Read>(mut reader: BufReader<R>) -> Result<i32, VarIntReadError>
 {
     let mut value: i32 = 0;
     let mut position: u8 = 0;
@@ -47,7 +47,7 @@ pub fn read_varint_bufreader<R: ?Sized>(mut reader: BufReader<&[u8]>) -> Result<
 }
 
 /// Read VarLong from BufReader
-pub fn read_varlong_bufreader<R: ?Sized + Read>(reader: &mut BufReader<R>) -> Result<i64, VarIntReadError>
+pub fn read_varlong_bufreader<R: Read>(reader: &mut BufReader<R>) -> Result<i64, VarIntReadError>
 {
     let mut value: i64 = 0;
     let mut position: u8 = 0;
